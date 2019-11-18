@@ -1,4 +1,10 @@
 language: rust
+rust:
+  - stable
+jobs:
+  allow_failures:
+  - rust: nightly
+  fast_finish: true
 after_success: |
     cargo doc \
     && echo '<meta http-equiv=refresh content=0;url=rcolours/index.html>' > target/doc/index.html && \
