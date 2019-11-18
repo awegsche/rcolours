@@ -1,23 +1,12 @@
-use std::fmt::{Debug, Display, Formatter};
 use std::fmt;
+use std::fmt::{Debug, Display, Formatter};
 
 pub mod clr;
 use clr::Color;
 
+/// A trait that transforms an objects into an ANSI escape sequence.
 pub trait AnsiEscape {
     fn ansi(&self) -> String;
-}
-
-impl Debug for Color {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        write!(f, "Color(r={}, g={}, b={})", self.0, self.1, self.2)
-    }
-}
-
-impl Display for Color {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        write!(f, "({}, {}, {})", self.0, self.1, self.2)
-    }
 }
 
 impl AnsiEscape for Color {
@@ -28,6 +17,8 @@ impl AnsiEscape for Color {
 
 pub enum Ansi {
     ColorEscape(Color),
+    ForegroundColor(u8),
+    BackgroundColor(u8),
     Bold,
     NotBold,
     Reset,
@@ -41,6 +32,8 @@ impl Display for Ansi {
             Bold => write!(f, "\x1B[1m"),
             NotBold => write!(f, "\x1B[22m"),
             Reset => write!(f, "\x1B[0m"),
+            ForegroundColor(c) => write!(f, "\x1B[38;5;{}m", c),
+            BackgroundColor(c) => write!(f, "\x1B[48;5;{}m", c),
         }
     }
 }
@@ -56,8 +49,16 @@ mod tests {
     }
 
     #[test]
+    fn convert_to_hex() {
+        assert_eq!(clr::Color(255, 0, 0).to_hex(), "#FF0000");
+    }
+
+    #[test]
     fn debug_working() {
-        assert_eq!(format!("{:?}", clr::Color(255, 0, 0)), "Color(r=255, g=0, b=0)");
+        assert_eq!(
+            format!("{:?}", clr::Color(255, 0, 0)),
+            "Color(r=255, g=0, b=0)"
+        );
     }
 
     #[test]
@@ -76,9 +77,17 @@ mod tests {
 
     #[test]
     fn test_ansi_colors() {
-
-        assert_eq!(format!("{}", Ansi::ColorEscape(clr::R)), "\x1B[38;2;255;0;0m");
-        assert_eq!(format!("{}", Ansi::ColorEscape(clr::GOLDENROD)), "\x1B[38;2;218;165;32m");
-        assert_eq!(format!("{}", Ansi::ColorEscape(Color(255,0,0))), "\x1B[38;2;255;0;0m");
+        assert_eq!(
+            format!("{}", Ansi::ColorEscape(clr::R)),
+            "\x1B[38;2;255;0;0m"
+        );
+        assert_eq!(
+            format!("{}", Ansi::ColorEscape(clr::GOLDENROD)),
+            "\x1B[38;2;218;165;32m"
+        );
+        assert_eq!(
+            format!("{}", Ansi::ColorEscape(Color(255, 0, 0))),
+            "\x1B[38;2;255;0;0m"
+        );
     }
 }
