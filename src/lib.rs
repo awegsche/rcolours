@@ -17,11 +17,12 @@
 //! ## Basic Usage
 //!
 //! ```
-//! use colors::clr;
+//! use colors::clr::RED;
 //! use colors::Ansi;
 //!
+//!
 //! println!("Change colour and font face of console output:");
-//! println!("Make the output {}red{}, {}bold{}, ")
+//! println!("Make the output {}red{}, {}bold{}", Ansi::ColorEscape(RED), Ansi::Reset, Ansi::Bold, Ansi::Reset);
 //!
 use std::fmt;
 use std::fmt::{Debug, Display, Formatter};
