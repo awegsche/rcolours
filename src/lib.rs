@@ -1,3 +1,28 @@
+//! # rcolours
+//! CSS and [XKCD](https://blog.xkcd.com/2010/05/03/color-survey-results/) colour package for rust.
+//!
+//! Makes CSS and XKCD colours (copied shamelessly from [matplotlib](https://matplotlib.org/)'s
+//! [color module](https://matplotlib.org/2.0.2/api/colors_api.html)) available as `u8`-tuples and
+//! provides basic conversion functions into different representations.
+//!
+//! An emphasis is on transforming the colour tuple to [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code) for colouring console output.
+//! For this goal the crate provides the
+//!
+//! ## Colour representation
+//!
+//! For each colour there is detailled information on how to represent it in different ways (for now hex,
+//! int/float tuple in RGB space). Other colour spaces (HUV, L\*AB, maybe also XYZ and spectrum samples)
+//! to come).
+//!
+//! ## Basic Usage
+//!
+//! ```
+//! use colors::clr;
+//! use colors::Ansi;
+//!
+//! println!("Change colour and font face of console output:");
+//! println!("Make the output {}red{}, {}bold{}, ")
+//!
 use std::fmt;
 use std::fmt::{Debug, Display, Formatter};
 
@@ -15,12 +40,36 @@ impl AnsiEscape for Color {
     }
 }
 
+/// Different kinds of escape codes. The `ColorEscape` variant converts a `Color` struct into an escape
+/// code.
+///
+/// # Examples
+/// - Color the console output
+/// ```
+/// use colors::clr::Color;
+/// use colors::Ansi;
+///
+/// let red = Ansi::ColorEscape(Color(255,0,0));
+/// assert_eq!(format!("{}", red), "\x1B[38;2;255;0;0m");
+/// ```
+/// - make it bold
+/// ```
+/// use colors::Ansi;
+///
+/// assert_eq!(format!("{}", Ansi::Bold), "\x1B[1m");
+/// ```
 pub enum Ansi {
+    /// Transforms the `Color` struct into an escape code of the form `ESC[38;2;R;G;Bm`
     ColorEscape(Color),
+    /// Sets the foreground color to one of 256 predefined colours from the colour palette
     ForegroundColor(u8),
+    /// Sets the background color to one of 256 predefined colours from the colour palette
     BackgroundColor(u8),
+    /// Sets the font to bold
     Bold,
+    /// Unsets bold
     NotBold,
+    /// Resets all changes to font and color
     Reset,
 }
 

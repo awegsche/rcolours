@@ -1,3 +1,4 @@
+//! Module containing all the colour definitions (and the main struct `Color`, of course).
 use std::fmt;
 use std::fmt::{Debug, Display, Formatter};
 
@@ -34,7 +35,6 @@ impl Display for Color {
         write!(f, "({}, {}, {})", self.0, self.1, self.2)
     }
 }
-
 
 /// Colour `(r = 0, g = 0, b = 255)`
 ///
