@@ -2,3 +2,7 @@
 **/*.rs.bk
 Cargo.lock
 tags
+all_the_colors.txt
+input.txt
+*.ipynb
+*.log
