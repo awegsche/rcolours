@@ -1,4 +1,4 @@
-# rcolours
+# rcolours [![Build Status](https://travis-ci.com/awegsche/rcolours.svg?branch=master)](https://travis-ci.com/awegsche/rcolours)
 CSS and [XKCD](https://blog.xkcd.com/2010/05/03/color-survey-results/) colour package for rust.
 
 Makes CSS and XKCD colours (copied shamelessly from [matplotlib](https://matplotlib.org/)'s [color module](https://matplotlib.org/2.0.2/api/colors_api.html)) available as `u8`-tuples and provides basic conversion functions into different representations.
