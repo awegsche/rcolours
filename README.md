@@ -1,9 +1,13 @@
-# rcolours [![Build Status][build-badge]][build] [![docs page][docs-badge]][docs]
+# rcolours [![Build Status][build-badge]][build] [![docs page][docs-badge]][docs] [![codecov][codecov-badge]][codecov]
+
+
  
 [docs-badge]: https://img.shields.io/badge/docs-website-blue.svg
 [docs]: https://awegsche.github.io/rcolours/colors/index.html
 [build]: https://travis-ci.com/awegsche/rcolours
 [build-badge]: https://travis-ci.com/awegsche/rcolours.svg?branch=master
+[codecov-badge]: https://codecov.io/gh/awegsche/rcolours/branch/master/graph/badge.svg
+[codecov]: https://codecov.io/gh/awegsche/rcolours
 
 CSS and [XKCD](https://blog.xkcd.com/2010/05/03/color-survey-results/) colour package for rust.
 
