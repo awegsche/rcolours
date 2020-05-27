@@ -83,7 +83,7 @@ def debug(col):
 
 
 def to_float_tuple(col):
-    return "({}, {}, {})".format(round(col[0]/255.0, 2), round(col[1]/255.0), round(col[2]/255.0))
+    return "({}, {}, {})".format(round(col[0]/255.0, 2), round(col[1]/255.0, 2), round(col[2]/255.0, 2))
 
 
 def to_int_tuple(col):
