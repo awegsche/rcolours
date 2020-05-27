@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Ansi","Different kinds of escape codes. The `ColorEscape` variant converts a `Color` struct into an escape code."]],"mod":[["clr","Module containing all the colour definitions (and the main struct `Color`, of course)."]],"trait":[["AnsiEscape","A trait that transforms an objects into an ANSI escape sequence."]]});
